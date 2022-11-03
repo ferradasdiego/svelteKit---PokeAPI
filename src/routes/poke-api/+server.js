@@ -5,10 +5,10 @@ export async function GET({ url }) {
 
 	try {
 		if (pkmNumber) {
-			console.log('pkmNumber', pkmNumber);
+			// console.log('pkmNumber', pkmNumber);
 			var request = await fetch('https://pokeapi.co/api/v2/pokemon/' + pkmNumber);
 		} else if (pkmName) {
-			console.log('pkmName', pkmName);
+			// console.log('pkmName', pkmName);
 			var request = await fetch('https://pokeapi.co/api/v2/pokemon/' + pkmName);
 		} else {
 			return new Response('{}');
@@ -19,7 +19,7 @@ export async function GET({ url }) {
 		// console.log('pokemon', pokemon);
 		return new Response(JSON.stringify(pokemon));
 	} catch (e) {
-		console.log('error', e);
+		// console.log('error', e);
 		return new Response('{}');
 	}
 }

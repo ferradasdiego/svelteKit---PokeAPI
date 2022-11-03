@@ -20,8 +20,12 @@
 				<a href="/">Home</a>
 			</li>
 
-			<li aria-current={$page.url.pathname === '/diego' ? 'page' : undefined}>
-				<a href="/diego">Diego</a>
+			<li aria-current={$page.url.pathname === '/poke-api' ? 'page' : undefined}>
+				<a href="/poke-api">Pokemon</a>
+			</li>
+
+			<li aria-current={$page.url.pathname === '/rick-morty-api' ? 'page' : undefined}>
+				<a href="/rick-morty-api">Rick & Morty</a>
 			</li>
 
 			<li aria-current={$page.url.pathname === '/about' ? 'page' : undefined}>
