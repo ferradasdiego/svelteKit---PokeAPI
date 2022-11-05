@@ -1,4 +1,7 @@
 <script>
+	import Pokemon from "./Pokemon.svelte"
+	import {persistentPokemon} from "$lib/stores.js"
+	import {onMount} from "svelte" 
 	let inputNumberValue="";
 	let inputNameValue="";
 	let pokemon;
@@ -6,19 +9,28 @@
 	async function getPkmByNumber(){
 		let request = await fetch ("/poke-api?pkmNumber="+inputNumberValue);
 		pokemon = await request.json();
+		persistentPokemon.set(pokemon);
+
+		console.log(pokemon);
 		fillImputs();
 	}
 
 	async function getPkmByName(){
 		let request = await fetch ("/poke-api?pkmNumber="+inputNameValue);
 		pokemon = await request.json();
+		persistentPokemon.set(pokemon);
 		fillImputs();
 	}
 
 	function fillImputs(){
-		inputNumberValue=pokemon.id;
-		inputNameValue=pokemon.name;
+		inputNumberValue=$persistentPokemon?.id;
+		inputNameValue=$persistentPokemon?.name;
 	}
+
+	onMount(()=>{
+		fillImputs()
+	})
+
 </script>
 
 <svelte:head>
@@ -27,20 +39,7 @@
 </svelte:head>
 
 <div id="container">
-{#if pokemon?.sprites}
-	<div id="pokemon">
-		<div id="pokemonImgs">
-			<img class="pkmImg" src={pokemon?.sprites?.front_default} alt="">
-			<img class="pkmImg" src={pokemon?.sprites?.back_default} alt="">
-		</div>
-		<div id="pokemonInfo">
-			<p class="infoLabel">Id: {pokemon.id}</p>
-			<p class="infoLabel">Name: {pokemon.name}</p>
-			<p class="infoLabel">Height: {pokemon.height}</p>
-			<p class="infoLabel">Weight: {pokemon.weight}</p>			
-		</div>
-	</div>
-	{/if}
+	<Pokemon pokemon={$persistentPokemon}/>
 
 	<div id="inputsContainer">
 		<div>
@@ -63,34 +62,8 @@
     align-items: center;
 	}
 
-	#pokemon{
-		background-color:red;
-		border: 1em solid red;
-	}
-
-	.pkmImg{
-		border: 1px solid red;
-	}
-
 	#inputsContainer{
 
-	}
-
-	#pokemonImgs{
-		background-color:white;
-	}
-
-	#pokemonInfo{
-
-	}
-
-	#pokemonImgs{
-		display:flex;
-	}
-
-	.infoLabel{
-		background-color:white;
-		padding: 5px;
 	}
 </style>
 
