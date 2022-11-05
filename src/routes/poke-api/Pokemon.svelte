@@ -12,8 +12,8 @@
     "ghost":"#778899",
     "steel":"#CCCCCC",
     "fire":"#FF7F00",
-    // "water":"#B0E2FF",
     "water":"#40b3ff",
+    // "water":"#B0E2FF",
     "grass":"#99FF66",
     "electric":"#FFD700",
     "psychic":"#FFB5C5",
@@ -46,8 +46,8 @@
 		<div id="pokemonInfo">
 			<p class="infoLabel">Id: {pokemon.id}</p>
 			<p class="infoLabel">Name: {capitalize(pokemon.name)}</p>
-			<p class="infoLabel">Height: {pokemon.height}</p> <!--DECIMETROS (pasar a m)-->
-			<p class="infoLabel">Weight: {pokemon.weight}</p> <!--DECAGRAMOS (pasar a kg)-->
+			<p class="infoLabel">Height: {pokemon.height/10} m</p>
+			<p class="infoLabel">Weight: {pokemon.weight/10} kg</p>
       {#each pokemon.types as type,i}
         <p class="infoLabel">Type {i+1}: {capitalize(type.type.name)} 
         <input class="colorType" type="color" value={pokemonTypes[pokemon.types[i].type.name]} disabled></p>	
